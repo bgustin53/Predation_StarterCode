@@ -14,27 +14,29 @@ import java.io.IOException;  // Import the IOException class to handle errors
 public class Forest extends World
 {
     // Forest Constants
-
-    // Forest Fields
-    private Animal animal;
-    private Plant plant;
+    private final int START_PLANTS = 800;
+    private final int START_HERBIVORE = 48;
+    private final int START_CARNIVORE = 3;
+    private final int STEP_REPORTING = 50;
+    private final int MAX_STEPS = 5000;
     
-    // Fields for writing data
+    // Creates fields for writing data
     private FileWriter myWriter;
     private int step;
     private boolean titlePrinted;
-    private final int STEP_REPORTING = 50;
-    private final int MAX_STEPS = 5000;
+    
+    // Object fields
+    private Animal animal;
+    private Plant plant;
     
     // Forest constructor
     public Forest() 
     {
         super(1200, 800, 1);
-        prepareScene();
-        createDataFile();
+        prepare();
     }
 
-    // Repeats to data output
+    // Repeats
     public void act()
     {
         tableGraph();
@@ -45,14 +47,32 @@ public class Forest extends World
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
      */
-    private void prepareScene()
-    {
+    private void prepare()
+    {     
+        for(int i = 0; i < START_PLANTS; i++)
+        {
+            int x = Greenfoot.getRandomNumber(getWidth());
+            int y = Greenfoot.getRandomNumber(getHeight());
+            plant = Math.random() < 0.5 ? new Perennial() : new Annual();
+            addObject(plant, x, y);
+        }
         
-    }
+        for(int i = 0; i < START_HERBIVORE; i++)
+        {
+            animal = new Herbivore();
+            int x = Greenfoot.getRandomNumber(getWidth());
+            int y = Greenfoot.getRandomNumber(getHeight());
+            addObject(animal, x, y);
+        }
         
-    // Creates a new data file on use computer called data.txt
-    private void createDataFile()
-    {        
+        for(int i = 0; i < START_CARNIVORE; i++)
+        {
+            animal = new Carnivore();
+            int x = Greenfoot.getRandomNumber(getWidth());
+            int y = Greenfoot.getRandomNumber(getHeight());
+            addObject(animal, x, y);
+        }
+        
         try
         {
             myWriter = new FileWriter("data.txt");
@@ -63,7 +83,6 @@ public class Forest extends World
         }
     }
     
-    //Displays data into the console and into the data file
     private void tableGraph()
     {
         step++;

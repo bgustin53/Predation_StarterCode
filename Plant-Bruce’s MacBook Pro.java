@@ -34,7 +34,7 @@ public abstract class Plant extends Actor
         }
     }
     
-    protected void die(int age, Plant plant)
+    protected void die(int age)
     {
         if(age > LONGEVITY || isTouching(Herbivore.class))
         {
