@@ -19,6 +19,7 @@ public class Carnivore extends Animal
     private Actor prey;
     private int age;   
     
+    // Constructs a new Carnivore
     public Carnivore()
     {
         //foodToBreed, breedAge, brood, longevity
@@ -28,6 +29,7 @@ public class Carnivore extends Animal
         fed = 0;
     }
  
+    // Repeats
     public void act()
     {
         seekFood();

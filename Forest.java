@@ -18,11 +18,11 @@ public class Forest extends World
     private final int START_HERBIVORE = 48;
     private final int START_CARNIVORE = 3;
     private final int STEP_REPORTING = 50;
-    private final int MAX_STEPS = 5000;
+    private final int MAX_STEPS = 5000;        //number of lines of data collected in the data file
     
     // Creates fields for writing data
     private FileWriter myWriter;
-    private int step;
+    private int step;                         // how often to add a data line
     private boolean titlePrinted;
     
     // Object fields
@@ -39,7 +39,7 @@ public class Forest extends World
     // Repeats
     public void act()
     {
-        tableGraph();
+        reportData();
         endSimulation();
     }
     
@@ -73,6 +73,7 @@ public class Forest extends World
             addObject(animal, x, y);
         }
         
+        // Opens a new data file on the client computer
         try
         {
             myWriter = new FileWriter("data.txt");
@@ -83,19 +84,28 @@ public class Forest extends World
         }
     }
     
-    private void tableGraph()
+    
+    private void reportData()
     {
         step++;
+        
+        // Creates an array of items by type in the world 
         List PlantObjects = getObjects(Plant.class);
         List HerbivoreObjects = getObjects(Herbivore.class);        
         List CarnivoreObjects = getObjects(Carnivore.class);
+        
+        // Initializes the string containing the data to print to the console and data file
         if(step % STEP_REPORTING == 0)
         {
             String stepLine = "Step: " + step;
             String plantLine = "Plants: " + PlantObjects.size();
             String herbivoreLine = "Herbivore: " + HerbivoreObjects.size();
             String carnivoreLine = "Carnivore: " + CarnivoreObjects.size();
+            
+            // Prints data to console 
             System.out.format("%15s%13s%16s%18s\n", stepLine, plantLine, herbivoreLine, carnivoreLine);
+
+            // First prints title to data file then prints data 
             String toPrint = "Step\tPlants(by 10s)\tHerbivores\tCarnivores\n";
             if(!titlePrinted)
             {
@@ -103,8 +113,11 @@ public class Forest extends World
             }
             else
             {
-                toPrint = step + "\t" + PlantObjects.size()/10 + "\t" + HerbivoreObjects.size() + "\t" + CarnivoreObjects.size() + "\n";
+                toPrint = step + "\t" + PlantObjects.size()/10 + "\t" + HerbivoreObjects.size() + 
+                                 "\t" + CarnivoreObjects.size() + "\n";
             }
+            
+            // Adds next line into data file
             try
             {
                 myWriter.append(toPrint);
