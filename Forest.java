@@ -12,9 +12,9 @@ import java.util.List;
 public class Forest extends World
 {
     // Forest Constants
-    private final int START_PLANTS = 800;
-    private final int START_HERBIVORE = 48;
-    private final int START_CARNIVORE = 3;
+    // add start plants
+    // add start animals
+    
     private final int STEP_REPORTING = 50;     // how often to add a data line
     private final int MAX_STEPS = 5000;        //number of lines of data collected in the data file
     
@@ -46,29 +46,7 @@ public class Forest extends World
      */
     private void prepareScene()
     {     
-        for(int i = 0; i < START_PLANTS; i++)
-        {
-            int x = Greenfoot.getRandomNumber(getWidth());
-            int y = Greenfoot.getRandomNumber(getHeight());
-            plant = Math.random() < 0.5 ? new Perennial() : new Annual();
-            addObject(plant, x, y);
-        }
-        
-        for(int i = 0; i < START_HERBIVORE; i++)
-        {
-            animal = new Herbivore();
-            int x = Greenfoot.getRandomNumber(getWidth());
-            int y = Greenfoot.getRandomNumber(getHeight());
-            addObject(animal, x, y);
-        }
-        
-        for(int i = 0; i < START_CARNIVORE; i++)
-        {
-            animal = new Carnivore();
-            int x = Greenfoot.getRandomNumber(getWidth());
-            int y = Greenfoot.getRandomNumber(getHeight());
-            addObject(animal, x, y);
-        }
+       // add organism to scene at random locations
     }
     
     
