@@ -15,6 +15,7 @@ public class Forest extends World
     // add start plants
     // add start animals
     
+    
     private final int STEP_REPORTING = 50;     // how often to add a data line
     private final int MAX_STEPS = 5000;        //number of lines of data collected in the data file
     
