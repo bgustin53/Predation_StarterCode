@@ -24,7 +24,7 @@ public abstract class Plant extends Actor
         if(age % SEED_CYCLE == 0)
         {
             int seeds = (int) (SEEDS * Math.random());
-            for(int i = 0; i < SEEDS; i++)
+            for(int i = 0; i < seeds; i++)
             {
                 int x = getX() + (int)(120 * Math.random()) - 60;
                 int y = getY() + (int)(120 * Math.random()) - 60;

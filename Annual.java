@@ -13,7 +13,7 @@ public class Annual extends Plant
     public Annual()
     {
         //max seed per cycle, seed cycle, longevity
-        super(120, 640, 700);
+        super(180, 640, 700);
     }
     
     /**
